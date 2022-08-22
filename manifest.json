@@ -1,0 +1,16 @@
+{
+  "name": "More Features for Notion",
+  "description": "Introduces exciting and valuable features to the notion web app.",
+  "version": "0.1",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.notion.so/*"],
+      "js": ["src/contentScripts/content-script.js"]
+    }
+  ],
+  "permissions": []
+}
