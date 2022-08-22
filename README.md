@@ -5,4 +5,4 @@ If you are only interested in running the latest version, you don't need this re
 
 ## Installing
 
-For more information please see (https://developer.chrome.com/)[https://developer.chrome.com/docs/extensions/mv3/getstarted/]
+For more information please see [https://developer.chrome.com/](https://developer.chrome.com/docs/extensions/mv3/getstarted/)
