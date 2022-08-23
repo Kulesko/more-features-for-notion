@@ -28,3 +28,7 @@ If you are only interested in running the latest version, you don't need this re
 Configuration is handled from within Notion itself, so you can start right off. For a consistent experience every member of your team needs to install the same version of the extention. 
 
 For more information please see [https://developer.chrome.com/](https://developer.chrome.com/docs/extensions/mv3/getstarted/)
+
+## Testing
+
+Currently, only manual testing is possible. Please use [https://brainy-hydrogen-393.notion.site/Automated-Testing](https://brainy-hydrogen-393.notion.site/Automated-Testing-d78e6e964cd74212895c37322b0c39ef).
