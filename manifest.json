@@ -8,7 +8,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://*.notion.so/*"],
+      "matches": ["https://*.notion.so/*", "https://*.notion.site/*", "https://*.notion.com/*"],
       "js": ["src/contentScripts/content-script.js"]
     }
   ],
