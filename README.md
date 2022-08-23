@@ -19,7 +19,7 @@ If you are only interested in running the latest version, you don't need this re
 <details>
   <summary>Flexible Dividers in a Board</summary>
   <p>
-  Prepend `'=='` to the name of a card in a board column and it will be rendered as a divider. Use this for instance to give more structure to your Kanban boards. Inspired by Trello.
+  Prepend "==" to the name of a card in a board column and it will be rendered as a divider. Use this for instance to give more structure to your Kanban boards. Inspired by Trello.
   </p>
 </details>
 
