@@ -9,13 +9,14 @@
 ![GitHub](https://img.shields.io/github/license/Kulesko/more-features-for-notion)
 
 
-## What this Is
+## What this is
 
 This is the source code for [more-features-for-notion](https://github.com/kulesko/more-features-for-notion), a browser extension for Chrome that adds so far absent features to [notion](https://www.notion.so/) inspired by other popular applications like [Trello](https://trello.com/). It is 100% free and open-source.
 
 If you are only interested in running the latest version, you don't need this repo. You can get the latest version through the Chrome Extensions Marketplace, **as soon as available**.
 
 ## Features
+#### Do more with your boards and tables
 <details>
   <summary>Flexible Dividers in a Board</summary>
   <p>
@@ -23,11 +24,16 @@ If you are only interested in running the latest version, you don't need this re
   </p>
 </details>
 
+#### Coming:
+- color code any visible property by using formula or text properties
+- use hotkeys to tag like Superman
+
 ## Getting Started
 
-Configuration is handled from within Notion itself, so you can start right off. For a consistent experience every member of your team needs to install the same version of the extention. 
+Configuration is handled from within Notion itself, so you can start right off. For a consistent experience every member of your team needs to install the same version of the extension and simply connect it to your team's notion workspace.
+For security reasons, to use advanced features on a notion database you need to share it with the integration. This is the default procedure in notion.
 
-For more information please see [https://developer.chrome.com/](https://developer.chrome.com/docs/extensions/mv3/getstarted/)
+For more information please see [https://developers.notion.com/docs/getting-started](https://developers.notion.com/docs/getting-started#step-2-share-a-database-with-your-integration)
 
 ## Testing
 
