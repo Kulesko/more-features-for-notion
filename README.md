@@ -1,4 +1,4 @@
-<div style="text-align:center">
+<div align="center">
 	<h1>More Features for Notion</h1>
 	<p>
 		<b>Improve and extend the workflow in <a href="https://www.notion.so">Notion</a> for your whole team via browser extension.</b>
