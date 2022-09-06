@@ -1,7 +1,7 @@
-<div align="center">
+<div style="text-align:center">
 	<h1>More Features for Notion</h1>
 	<p>
-		<b>Improve and extend the workflow in <a href="https://www.notion.so">Notion</a> for your whole team.</b>
+		<b>Improve and extend the workflow in <a href="https://www.notion.so">Notion</a> for your whole team via browser extension.</b>
 	</p>
 	<br>
 </div>
@@ -31,4 +31,4 @@ For more information please see [https://developer.chrome.com/](https://develope
 
 ## Testing
 
-Currently, only manual testing is possible. Please use [https://brainy-hydrogen-393.notion.site/Automated-Testing](https://brainy-hydrogen-393.notion.site/Automated-Testing-d78e6e964cd74212895c37322b0c39ef).
+Currently, only manual testing is possible. Please use [https://brainy-hydrogen-393.notion.site/Testing](https://brainy-hydrogen-393.notion.site/Testing-d78e6e964cd74212895c37322b0c39ef).
