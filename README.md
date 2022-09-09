@@ -35,6 +35,9 @@ For security reasons, to use advanced features on a notion database you need to 
 
 For more information please see [https://developers.notion.com/docs/getting-started](https://developers.notion.com/docs/getting-started#step-2-share-a-database-with-your-integration)
 
+For installing the extension in your local Chrome instance, 
+please refer to [https://developer.chrome.com](https://developer.chrome.com/docs/extensions/mv3/getstarted/).
+
 ## Testing
 
 Currently, only manual testing is possible. Please use [https://brainy-hydrogen-393.notion.site/Testing](https://brainy-hydrogen-393.notion.site/Testing-d78e6e964cd74212895c37322b0c39ef).
