@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Notion Integration</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
+<script src="popup.js" type="text/javascript"></script>
+
 <body style="background-color: rgb(17, 12, 22); color: antiquewhite;">
-    <h1 style="width:20pc">Connect with notion to enable whole feature set.</h1>
-    <p>This extension is open source on <a href="https://github.com/Kulesko/more-features-for-notion">github</a> with 🤍</p>
+    <h1 style="width:20pc">Connect with notion to enable all features</h1>
+    <p>Connect to your team's workspace own private notion integration</p>
+    <p>If you are the workspace owner, simply create a private integration at
+        <a>https://www.notion.so/my-integrations</a> and <b>share it with your team.</b></p>
+
+    <form id="form-private-token"><label for="api-key" id="label-token">Token:</label><input type="text" id="api-key" name="Api Token">
+        <br>
+        <input type="submit" value="Connect">
+    </form>
+    <p>This extension is open source on <a href="https://github.com/Kulesko/more-features-for-notion">github</a> with 🤍
+    </p>
 </body>
+
 </html>
