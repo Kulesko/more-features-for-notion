@@ -12,7 +12,7 @@
       "js": ["src/contentScripts/content-script.js"]
     }
   ],
-  "permissions": [],
+  "permissions": ["storage"],
   "action": {
     "default_popup": "build/popup.html"
   }
