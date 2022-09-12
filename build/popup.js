@@ -42,14 +42,14 @@
         Http.onreadystatechange = (e) => {
             console.log("success");
             console.log(e);
-            if(Http.status == 200 && typeof promise.success === 'function')
+            if (Http.status == 200 && typeof promise.success === 'function')
                 promise.success(e);
-            else if(typeof promise.failure === 'function')
+            else if (typeof promise.failure === 'function')
                 promise.failure(e);
         };
         Http.onerror = (e) => {
             console.log("failure");
-            if(typeof promise.failure === 'function')
+            if (typeof promise.failure === 'function')
                 promise.failure(e);
         };
         console.log("validating key")
@@ -87,10 +87,10 @@
                 enterStateNoConnection();
             } else {
                 let promise = validateToken(result.apiToken);
-                promise.success = (e)=>{
+                promise.success = (e) => {
                     enterStateConnectionReady();
                 };
-                promise.failure = (e)=>{
+                promise.failure = (e) => {
                     console.log("Retrieved token is invalid");
                     enterStateInvalidConnection();
                 };
