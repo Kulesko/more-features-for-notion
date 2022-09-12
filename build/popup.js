@@ -1,12 +1,22 @@
 "use strict";
 
 (() => {
+    const tokenHolder = document.getElementById('api-key');
+
+    function clearTokenInput(tokenHolder) {
+        tokenHolder.value = '';
+    }
+
+    function hideTokenInput() {
+        document.getElementById('form-private-token').style = 'display: none';
+    }
+
+    function showTokenInput() {
+        document.getElementById('form-private-token').style = null;
+    }
 
     function validate() {
-
-        let tokenHolder = document.getElementById('api-key');
         let apiToken = tokenHolder.value;
-
 
         chrome.storage.sync.get(['apiToken'], function (result) {
             console.log('Value currently is ' + result['apiToken']);
@@ -22,7 +32,7 @@
                     chrome.storage.sync.set({"apiToken": apiToken}, function () {
                         console.log('Api token saved to storage');
                     });
-                    document.getElementById('form-private-token').style = 'display: none';
+                    hideTokenInput();
                 };
                 Http.onerror = (e) => {
                     console.log("failure");
@@ -33,17 +43,18 @@
             })();
         });
 
-
-        tokenHolder.value = '';
+        clearTokenInput(tokenHolder);
         return false;
     }
 
+
     function init() {
         document.getElementById('form-private-token').onsubmit = validate;
-        document.getElementById('form-private-token').style = 'display: none';
+        // until we check do not let the user enter a new api token
+        hideTokenInput();
         chrome.storage.sync.get(['apiToken'], function (result) {
             if (!result) {
-                document.getElementById('form-private-token').style = null;
+                showTokenInput();
             }
         });
     }
