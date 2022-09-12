@@ -2,16 +2,33 @@
 
 (() => {
     function clearTokenInput() {
-        let tokenHolder = document.getElementById('api-key');
-        tokenHolder.value = '';
+        document.getElementById('api-key').value = '';
     }
 
     function hideTokenInput() {
         document.getElementById('form-private-token').style = 'display: none';
     }
 
-    function showTokenInput() {
+    function enterStateLoading() {
+        clearTokenInput();
+        hideTokenInput();
+    }
+
+    function enterStateConnectionReady() {
+        // TODO adapt text
+        clearTokenInput();
+        hideTokenInput();
+    }
+
+    function enterStateNoConnection() {
+        clearTokenInput();
         document.getElementById('form-private-token').style = null;
+    }
+
+    function enterStateInvalidConnection() {
+        clearTokenInput();
+        document.getElementById('form-private-token').style = null;
+        document.getElementById('label-token').style = 'color:red';
     }
 
     function validateToken(apiToken) {
@@ -39,21 +56,21 @@
         return promise;
     }
 
+
     function validate() {
         let tokenHolder = document.getElementById('api-key');
         let apiToken = tokenHolder.value;
-        clearTokenInput();
 
         let promise = validateToken(apiToken);
         promise.success = () => {
             chrome.storage.sync.set({"apiToken": apiToken}, function () {
                 console.log('Api token saved to storage');
             });
-            hideTokenInput();
+            enterStateConnectionReady();
         };
         promise.failure = (e) => {
             console.log(e);
-            document.getElementById('label-token').style = 'color:red';
+            enterStateInvalidConnection();
         };
 
         return false;
@@ -63,16 +80,19 @@
     function init() {
         document.getElementById('form-private-token').onsubmit = validate;
         // until we check do not let the user enter a new api token
-        hideTokenInput();
+        enterStateLoading();
         chrome.storage.sync.get(['apiToken'], function (result) {
             if (!result.apiToken) {
                 console.log("No api token retrieved");
-                showTokenInput();
+                enterStateNoConnection();
             } else {
                 let promise = validateToken(result.apiToken);
+                promise.success = (e)=>{
+                    enterStateConnectionReady();
+                };
                 promise.failure = (e)=>{
                     console.log("Retrieved token is invalid");
-                    showTokenInput();
+                    enterStateInvalidConnection();
                 };
             }
         });
