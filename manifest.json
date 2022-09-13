@@ -3,9 +3,6 @@
   "description": "Introduces exciting and valuable features to the notion web app.",
   "version": "0.1",
   "manifest_version": 3,
-  "background": {
-    "service_worker": "background.js"
-  },
   "content_scripts": [
     {
       "matches": ["https://*.notion.so/*", "https://*.notion.site/*", "https://*.notion.com/*"],
@@ -14,7 +11,7 @@
   ],
   "permissions": ["storage"],
   "action": {
-    "default_popup": "build/popup.html"
+    "default_popup": "build/app/popup.html"
   }
 
 }
