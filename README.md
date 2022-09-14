@@ -13,7 +13,7 @@
 
 This is the source code for [more-features-for-notion](https://github.com/kulesko/more-features-for-notion), a
 privacy-first browser extension for Chrome that adds power features so far absent in [notion](https://www.notion.so/),
-inspired by other popular applications like [Trello](https://trello.com/). It is 100% free and open-source.
+inspired by other popular applications like [Trello](https://trello.com/). The extension achieves the advanced feature set by utilizing the official Notion API. It is 100% free and open-source.
 
 If you are only interested in running the latest version, you don't need this repo. You can get the latest version
 through the Chrome Extensions Marketplace, **as soon as available**.
