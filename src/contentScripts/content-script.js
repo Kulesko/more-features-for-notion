@@ -42,7 +42,8 @@
 
     function updateDataBaseViewConfiguration(databaseView) {
         let blockId = findBlockId(databaseView);
-        databaseViewConf[blockId] = {"hotkeyProperty": ""};
+        if (!!blockId)
+            databaseViewConf[blockId] = {"hotkeyProperty": ""};
     }
 
     function processPage() {
