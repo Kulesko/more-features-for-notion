@@ -1,4 +1,6 @@
 let databaseViewConf = {};
+const hotkeysConfPrefix = '#hotkeys';
+const optHotkeysConfPrefix = '#opt_hotkeys';
 
 function retrieveAllConnectedDatabases() {
     const promise = {};
@@ -23,12 +25,33 @@ function retrieveAllConnectedDatabases() {
     return promise;
 }
 
+function doesPropertyExist(property, db) {
+    return !!db.properties[property];
+}
+
+function parseConfigProperty(propertyName, confPrefix, db) {
+    let hotkeyProperty = propertyName.slice(confPrefix.length + 1);
+    if (doesPropertyExist(hotkeyProperty, db))
+        databaseViewConf[db.id][confPrefix] = hotkeyProperty;
+    else
+        console.log(hotkeyProperty + " property does not exists in database");
+}
+
 function parseConfigurationproperties(db) {
-    Object.keys(db.properties).forEach(function (key, index) {
+    Object.keys(db.properties).forEach(function (key) {
         if (db.properties[key].type === 'formula' || db.properties[key].type === 'rich_text') {
             console.log(db.properties[key].type);
+            if (!databaseViewConf[db.id])
+                databaseViewConf[db.id] = {};
+            if (key.startsWith(hotkeysConfPrefix)) {
+                parseConfigProperty(key, hotkeysConfPrefix, db);
+            } else if (key.startsWith(optHotkeysConfPrefix)) {
+                parseConfigProperty(key, optHotkeysConfPrefix, db);
+            }
         }
     });
+    console.log("... updated configuration");
+    console.log(databaseViewConf);
 }
 
 function updateConfiguration() {
