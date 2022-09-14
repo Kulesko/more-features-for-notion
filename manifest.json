@@ -5,13 +5,27 @@
   "manifest_version": 3,
   "content_scripts": [
     {
-      "matches": ["https://*.notion.so/*", "https://*.notion.site/*", "https://*.notion.com/*"],
-      "js": ["src/contentScripts/content-script.js"]
+      "matches": [
+        "https://*.notion.so/*",
+        "https://*.notion.site/*",
+        "https://*.notion.com/*"
+      ],
+      "js": [
+        "src/contentScripts/content-script.js"
+      ]
     }
   ],
-  "permissions": ["storage"],
+  "background": {
+    "service_worker": "build/background.js"
+  },
   "action": {
     "default_popup": "build/app/popup.html"
-  }
-
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://api.notion.com/",
+    "https://www.notion.so/"
+  ]
 }

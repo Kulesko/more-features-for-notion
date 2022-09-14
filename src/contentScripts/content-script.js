@@ -3,7 +3,7 @@
 (() => {
 
     let isDarkMode;
-    let databaseViewConf = {};
+
 
     function renderCustomDividers(board) {
         let highlightable = board.querySelectorAll('.notion-collection-item div[data-content-editable-leaf]');
@@ -40,12 +40,6 @@
         return null;
     }
 
-    function updateDataBaseViewConfiguration(databaseView) {
-        let blockId = findBlockId(databaseView);
-        if (!!blockId)
-            databaseViewConf[blockId] = {"hotkeyProperty": ""};
-    }
-
     function processPage() {
         isDarkMode = document.querySelector('.notion-dark-theme');
 
@@ -55,17 +49,8 @@
         }
     }
 
-    function updateConfiguration() {
-        let databaseViews = document.querySelectorAll('.notion-collection-view-body');
-        if (!!databaseViews) {
-            databaseViews.forEach(v => updateDataBaseViewConfiguration(v));
-        }
-    }
-
 
     // workaround for not finding a good event of notion rendering updated content
     window.setInterval(processPage, 50);
-    // configuration does not change that often, so using longer timeout
-    window.setInterval(updateConfiguration, 600);
 
 })();
