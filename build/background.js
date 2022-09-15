@@ -88,8 +88,8 @@ function patchSelection(optionIndex, target) {
                 console.log(body);
                 fetch('https://api.notion.com/v1/pages/' + target.blockId, {
                     method: 'PATCH',
-                    headers: [['Authorization', 'Bearer ' + result.apiToken], ['Notion-Version', '2022-06-28'], ['Context-Type', 'application/json']],
-                    body: body
+                    headers: [['Authorization', 'Bearer ' + result.apiToken], ['Notion-Version', '2022-06-28'], ['Content-Type', 'application/json']],
+                    body: JSON.stringify(body)
                 })
                     .then((response) => response.json())
                     .then((data) => {
