@@ -3,6 +3,8 @@
 (() => {
 
     let isDarkMode;
+    let focusedDatabaseBlockId = null;
+    let focusedDatabaseId = null;
 
 
     function renderCustomDividers(board) {
@@ -68,10 +70,13 @@
             function (e) {
                 let element = document.elementFromPoint(e.clientX, e.clientY);
                 if (!element || !element.closest('.notion-collection-item')) {
-                    console.log("outside of focusable");
+                    focusedDatabaseBlockId = null;
+                    focusedDatabaseId = null;
                 } else {
-                    let parentBlockId = findParentBlockId(element);
-                    console.log(parentBlockId);
+                    focusedDatabaseBlockId = findParentBlockId(element);
+                    focusedDatabaseId = findDbBlockId(element.closest('.notion-collection_view_page-block'));
+                    console.log(focusedDatabaseBlockId);
+                    console.log(focusedDatabaseId);
                 }
             });
 
