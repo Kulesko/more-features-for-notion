@@ -37,6 +37,10 @@
         if (!!blockIdHolder) {
             return blockIdHolder.getAttribute('data-block-id');
         }
+        blockIdHolder = databaseView.querySelector('.notion-page-block');
+        if (!!blockIdHolder) {
+            return blockIdHolder.getAttribute('data-block-id');
+        }
         return null;
     }
 
@@ -63,7 +67,7 @@
         document.addEventListener("mousemove",
             function (e) {
                 let element = document.elementFromPoint(e.clientX, e.clientY);
-                if (!element || !element.closest('.notion-focusable')) {
+                if (!element || !element.closest('.notion-collection-item')) {
                     console.log("outside of focusable");
                 } else {
                     let parentBlockId = findParentBlockId(element);
