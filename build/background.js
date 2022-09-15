@@ -31,9 +31,16 @@ function doesPropertyExist(property, db) {
 
 function parseConfigProperty(propertyName, confPrefix, db) {
     let hotkeyProperty = propertyName.slice(confPrefix.length + 1);
-    if (doesPropertyExist(hotkeyProperty, db))
-        databaseViewConf[db.id][confPrefix] = hotkeyProperty;
-    else
+    if (doesPropertyExist(hotkeyProperty, db)) {
+        let options = [];
+        let property = db.properties[hotkeyProperty];
+        if (!!property.select && !!property.select.options) {
+            property.select.options.forEach(o => {
+                options.push(o.id);
+            });
+        }
+        databaseViewConf[db.id][confPrefix] = {property_name: hotkeyProperty, options: options};
+    } else
         console.log(hotkeyProperty + " property does not exists in database");
 }
 
@@ -67,8 +74,8 @@ function updateConfiguration() {
 
 updateConfiguration();
 
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    if (request.action == "hotkey") {
+chrome.runtime.onMessage.addListener(function (request) {
+    if (request.action === "hotkey") {
         console.log("hotkey");
         console.log(request.target);
         console.log(request.value);
