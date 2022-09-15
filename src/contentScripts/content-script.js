@@ -92,6 +92,7 @@
                     chrome.runtime.sendMessage({
                         action: "hotkey",
                         value: e.key.charCodeAt(0),
+                        altKey: e.altKey,
                         target: {blockId: focusedDatabaseBlockId, dbId: focusedDatabaseId}
                     });
                     console.log("hotkey action detected")
