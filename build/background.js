@@ -80,23 +80,25 @@ function patchSelection(optionIndex, target) {
     chrome.storage.sync.get(['apiToken'], function (result) {
         if (!result.apiToken) {
             console.log("No api token retrieved");
-        } else if (conf.options.length < optionIndex) {
+        } else {
             let conf = databaseViewConf[target.dbId][hotkeysConfPrefix];
-            let body = {properties: {}};
-            body.properties[conf.propertyName] = {select: {id: conf.options[optionIndex]}};
-            console.log(body);
-            fetch('https://api.notion.com/v1/pages/' + target.blockId, {
-                method: 'PATCH',
-                headers: [['Authorization', 'Bearer ' + result.apiToken], ['Notion-Version', '2022-06-28'], ['Context-Type', 'application/json']],
-                body: body
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log("patch result");
-                    console.log(data);
-                    if (typeof promise.success === 'function')
-                        promise.success(data.results);
-                });
+            if (optionIndex < conf.options.length) {
+                let body = {properties: {}};
+                body.properties[conf.propertyName] = {select: {id: conf.options[optionIndex]}};
+                console.log(body);
+                fetch('https://api.notion.com/v1/pages/' + target.blockId, {
+                    method: 'PATCH',
+                    headers: [['Authorization', 'Bearer ' + result.apiToken], ['Notion-Version', '2022-06-28'], ['Context-Type', 'application/json']],
+                    body: body
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log("patch result");
+                        console.log(data);
+                        if (typeof promise.success === 'function')
+                            promise.success(data.results);
+                    });
+            }
         }
     });
     return promise;
