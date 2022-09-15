@@ -80,7 +80,7 @@ function patchSelection(optionIndex, target) {
     chrome.storage.sync.get(['apiToken'], function (result) {
         if (!result.apiToken) {
             console.log("No api token retrieved");
-        } else {
+        } else if (conf.options.length < optionIndex) {
             let conf = databaseViewConf[target.dbId][hotkeysConfPrefix];
             let body = {properties: {}};
             body.properties[conf.propertyName] = {select: {id: conf.options[optionIndex]}};
