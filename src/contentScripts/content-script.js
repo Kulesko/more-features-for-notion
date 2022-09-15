@@ -63,6 +63,12 @@
         }
     }
 
+    function isDbItemShortcut(key) {
+        // ascii 0, 1, .. 9
+        let code = key.charCodeAt(0);
+        return code >= 48 && code <= 57;
+    }
+
     function init() {
         // track block id under the mouse
         // though need also to track when element changes to outside the focusable or if there is a modal
@@ -77,6 +83,18 @@
                     focusedDatabaseId = findDbBlockId(element.closest('.notion-collection_view_page-block'));
                     console.log(focusedDatabaseBlockId);
                     console.log(focusedDatabaseId);
+                }
+            });
+
+        document.addEventListener("keydown",
+            function (e) {
+                if (!!focusedDatabaseBlockId && isDbItemShortcut(e.key)) {
+                    chrome.runtime.sendMessage({
+                        action: "hotkey",
+                        value: e.key.charCodeAt(0),
+                        target: {blockId: focusedDatabaseBlockId, dbId: focusedDatabaseId}
+                    });
+                    console.log("hotkey action detected")
                 }
             });
 
