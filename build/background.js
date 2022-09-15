@@ -16,7 +16,8 @@ function retrieveAllConnectedDatabases() {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("dbs retrieved");
-                    promise.success(data.results);
+                    if (typeof promise.success === 'function')
+                        promise.success(data.results);
                 });
         }
     });
@@ -39,7 +40,7 @@ function parseConfigProperty(propertyName, confPrefix, db) {
                 options.push(o.id);
             });
         }
-        databaseViewConf[db.id][confPrefix] = {property_name: hotkeyProperty, options: options};
+        databaseViewConf[db.id][confPrefix] = {propertyName: hotkeyProperty, options: options};
     } else
         console.log(hotkeyProperty + " property does not exists in database");
 }
@@ -74,10 +75,38 @@ function updateConfiguration() {
 
 updateConfiguration();
 
+function patchSelection(optionIndex, target) {
+    const promise = {};
+    chrome.storage.sync.get(['apiToken'], function (result) {
+        if (!result.apiToken) {
+            console.log("No api token retrieved");
+        } else {
+            let conf = databaseViewConf[target.dbId][hotkeysConfPrefix];
+            let body = {properties: {}};
+            body.properties[conf.propertyName] = {select: {id: conf.options[optionIndex]}};
+            console.log(body);
+            fetch('https://api.notion.com/v1/pages/' + target.blockId, {
+                method: 'PATCH',
+                headers: [['Authorization', 'Bearer ' + result.apiToken], ['Notion-Version', '2022-06-28'], ['Context-Type', 'application/json']],
+                body: body
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("patch result");
+                    console.log(data);
+                    if (typeof promise.success === 'function')
+                        promise.success(data.results);
+                });
+        }
+    });
+    return promise;
+}
+
 chrome.runtime.onMessage.addListener(function (request) {
     if (request.action === "hotkey") {
         console.log("hotkey");
         console.log(request.target);
         console.log(request.value);
+        patchSelection(request.value, request.target);
     }
 });

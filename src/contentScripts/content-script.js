@@ -81,8 +81,6 @@
                 } else {
                     focusedDatabaseBlockId = findParentBlockId(element);
                     focusedDatabaseId = findDbBlockId(element.closest('.notion-collection_view_page-block'));
-                    console.log(focusedDatabaseBlockId);
-                    console.log(focusedDatabaseId);
                 }
             });
 
@@ -91,7 +89,7 @@
                 if (!!focusedDatabaseBlockId && isDbItemShortcut(e.key)) {
                     chrome.runtime.sendMessage({
                         action: "hotkey",
-                        value: e.key.charCodeAt(0),
+                        value: e.key.charCodeAt(0) - 48,
                         altKey: e.altKey,
                         target: {blockId: focusedDatabaseBlockId, dbId: focusedDatabaseId}
                     });
