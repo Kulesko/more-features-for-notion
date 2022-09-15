@@ -32,8 +32,16 @@
     }
 
 
-    function findBlockId(databaseView) {
+    function findDbBlockId(databaseView) {
         let blockIdHolder = databaseView.querySelector('.notion-collection_view_page-block');
+        if (!!blockIdHolder) {
+            return blockIdHolder.getAttribute('data-block-id');
+        }
+        return null;
+    }
+
+    function findParentBlockId(element) {
+        let blockIdHolder = element.closest('.notion-page-block');
         if (!!blockIdHolder) {
             return blockIdHolder.getAttribute('data-block-id');
         }
@@ -49,8 +57,24 @@
         }
     }
 
+    function init() {
+        // track block id under the mouse
+        // though need also to track when element changes to outside the focusable or if there is a modal
+        document.addEventListener("mousemove",
+            function (e) {
+                let element = document.elementFromPoint(e.clientX, e.clientY);
+                if (!element || !element.closest('.notion-focusable')) {
+                    console.log("outside of focusable");
+                } else {
+                    let parentBlockId = findParentBlockId(element);
+                    console.log(parentBlockId);
+                }
+            });
 
-    // workaround for not finding a good event of notion rendering updated content
-    window.setInterval(processPage, 50);
+        // workaround for not finding a good event in notion rendering updated content
+        window.setInterval(processPage, 50);
+    }
+
+    init();
 
 })();
