@@ -34,13 +34,29 @@ function parseConfigProperty(propertyName, confPrefix, db) {
     let hotkeyProperty = propertyName.slice(confPrefix.length + 1);
     if (doesPropertyExist(hotkeyProperty, db)) {
         let options = [];
-        let property = db.properties[hotkeyProperty];
-        if (!!property.select && !!property.select.options) {
-            property.select.options.forEach(o => {
+        let targetProperty = db.properties[hotkeyProperty];
+        let targetPropertyType;
+        if (!!targetProperty.select && !!targetProperty.select.options) {
+            targetPropertyType = "select";
+            targetProperty.select.options.forEach(o => {
+                options.push(o.id);
+            });
+        } else if (!!targetProperty.status && !!targetProperty.status.options) {
+            targetPropertyType = "status";
+            targetProperty.status.options.forEach(o => {
+                options.push(o.id);
+            });
+        } else if (!!targetProperty.multi_select && !!targetProperty.multi_select.options) {
+            targetPropertyType = "multi_select";
+            targetProperty.multi_select.options.forEach(o => {
                 options.push(o.id);
             });
         }
-        databaseViewConf[db.id][confPrefix] = {propertyName: hotkeyProperty, options: options};
+        databaseViewConf[db.id][confPrefix] = {
+            propertyName: hotkeyProperty,
+            options: options,
+            type: targetPropertyType
+        };
     } else
         console.log(hotkeyProperty + " property does not exists in database");
 }
@@ -81,10 +97,16 @@ function patchSelection(optionIndex, target, hotkeysConfPrefix) {
         if (!result.apiToken) {
             console.log("No api token retrieved");
         } else {
-            let conf = databaseViewConf[target.dbId][hotkeysConfPrefix];
-            if (optionIndex < conf.options.length) {
+            let hotkeyConfig = databaseViewConf[target.dbId][hotkeysConfPrefix];
+            if (optionIndex < hotkeyConfig.options.length) {
                 let body = {properties: {}};
-                body.properties[conf.propertyName] = {select: {id: conf.options[optionIndex]}};
+                let newValue = {};
+                if (hotkeyConfig.type === 'multi_select')
+                    // for now just replace like single select
+                    newValue[hotkeyConfig.type] = [{id: hotkeyConfig.options[optionIndex]}];
+                else
+                    newValue[hotkeyConfig.type] = {id: hotkeyConfig.options[optionIndex]};
+                body.properties[hotkeyConfig.propertyName] = newValue;
                 console.log(body);
                 fetch('https://api.notion.com/v1/pages/' + target.blockId, {
                     method: 'PATCH',
