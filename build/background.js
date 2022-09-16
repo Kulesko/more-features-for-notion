@@ -75,7 +75,7 @@ function updateConfiguration() {
 
 updateConfiguration();
 
-function patchSelection(optionIndex, target) {
+function patchSelection(optionIndex, target, hotkeysConfPrefix) {
     const promise = {};
     chrome.storage.sync.get(['apiToken'], function (result) {
         if (!result.apiToken) {
@@ -109,8 +109,9 @@ chrome.runtime.onMessage.addListener(function (request) {
         console.log("hotkey");
         console.log(request.target);
         console.log(request.value);
+        console.log(request.altKey);
         // interpret key '1' as the first element and '0' as the 10th
         let optionIndex = request.value == 0 ? 9 : request.value - 1;
-        patchSelection(optionIndex, request.target);
+        patchSelection(optionIndex, request.target, request.altKey ? optHotkeysConfPrefix : hotkeysConfPrefix);
     }
 });
