@@ -21,15 +21,22 @@ through the Chrome Extensions Marketplace, **as soon as available**.
 ## Features
 #### Do more with your boards and tables
 <details>
+  <summary>Use hotkeys to tag like Superman</summary>
+  <p>
+  Hover above a card or table row and press the keys 1,2,..0 to change the tag. The targeted property needs to be configured for the database: simply add an empty  formula with the name <b>#hotkeys_<i>property_name</i></b> 
+</p><p> You can even define an alternative hotkey property for when pressing the ALT/Options key. Simply define an empty formula on your database with the name <b>#opt_hotkeys_<i>property_name</i></b> 
+	  <br> <i>Inspired by Trello</i>
+  </p>
+</details>
+<details>
   <summary>Flexible Dividers in a Board</summary>
   <p>
-  Prepend "==" to the name of a card in a board column and it will be rendered as a divider. Use this for instance to give more structure to your Kanban boards. Inspired by Trello.
+  Prepend "==" to the name of a card in a board column and it will be rendered as a divider. Use this for instance to give more structure to your Kanban boards. <br> <i>Inspired by Trello</i>
   </p>
 </details>
 
 #### Coming:
 - color code any visible property by using formula or text properties
-- use hotkeys to tag like Superman
 
 ## Getting Started
 
