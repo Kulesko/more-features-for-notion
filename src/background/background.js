@@ -133,7 +133,7 @@ chrome.runtime.onMessage.addListener(function (request) {
         console.log(request.value);
         console.log(request.altKey);
         // interpret key '1' as the first element and '0' as the 10th
-        let optionIndex = request.value == 0 ? 9 : request.value - 1;
+        let optionIndex = request.value === 0 ? 9 : request.value - 1;
         patchSelection(optionIndex, request.target, request.altKey ? optHotkeysConfPrefix : hotkeysConfPrefix);
     }
 });
