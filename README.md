@@ -1,7 +1,7 @@
 <div align="center">
 	<h1>More Features for Notion</h1>
 	<p>
-		<b>Improve and extend the workflow in <a href="https://www.notion.so">Notion</a> for your whole team via browser extension.</b>
+		<b>Get superpowers for the workflow in <a href="https://www.notion.so">Notion</a> for you and your whole team via browser extension.</b>
 	</p>
 	<br>
 </div>
