@@ -109,6 +109,8 @@ chrome.runtime.onMessage.addListener(function (request) {
         console.log("hotkey");
         console.log(request.target);
         console.log(request.value);
-        patchSelection(request.value, request.target);
+        // interpret key '1' as the first element and '0' as the 10th
+        let optionIndex = request.value == 0 ? 9 : request.value - 1;
+        patchSelection(optionIndex, request.target);
     }
 });
